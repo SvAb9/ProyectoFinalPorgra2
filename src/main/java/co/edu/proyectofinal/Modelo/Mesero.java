@@ -2,10 +2,12 @@ package co.edu.proyectofinal.Modelo;
 
 public class Mesero extends Empleado {
     private Orden orden;
+    private OrdenCaretaker caretaker;
 
     public Mesero(String nombre, String apellido, String usuario, String contraseña, String documento) {
         super(nombre, apellido, usuario, contraseña, documento);
         this.orden = new Orden();
+        this.caretaker= new OrdenCaretaker();
     }
     
     public String getTipo() {
@@ -26,6 +28,7 @@ public class Mesero extends Empleado {
         }
         Producto producto = factory.crearProducto(nombre, precio, especificacion1, especificacion2);
         orden.agregarProducto(producto);
+        caretaker.guardarMemento(orden);
         System.out.println("Producto agregado a la orden: " + producto.getNombre());
     }
 
@@ -35,6 +38,16 @@ public class Mesero extends Empleado {
 
     public void actualizarEstadoOrden(String estado) {
         orden.setEstado(estado);
+        caretaker.guardarMemento(orden);
         System.out.println("Estado de la orden actualizado a: " + estado);
     }
+
+    public void deshacer() {
+        caretaker.deshacer(orden);
+    }
+
+    public void rehacer() {
+        caretaker.rehacer(orden);
+    }
+
 }
