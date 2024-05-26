@@ -3,7 +3,7 @@ package co.edu.proyectofinal.Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona implements Observer{
     
     private List<CuponStrategy> cupones;
     
@@ -13,8 +13,8 @@ public class Cliente extends Persona{
         this.cupones = new ArrayList<>();
     }
 
-    public String getusuario() {
-        return documento;
+    public String getUsuario() {
+        return usuario;
     }
 
     public void addCupon(CuponStrategy cupon){
@@ -27,5 +27,10 @@ public class Cliente extends Persona{
 
     public double aplicarCupon(double total, CuponStrategy cuponSeleccionado){
         return cuponSeleccionado.aplicarDescuento(total);
+    }
+
+    @Override
+    public void update(String message){
+        System.out.println("Notificaion para:" + getUsuario() + message );
     }
 }

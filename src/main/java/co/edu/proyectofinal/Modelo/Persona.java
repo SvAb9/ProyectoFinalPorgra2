@@ -3,7 +3,7 @@ package co.edu.proyectofinal.Modelo;
 public class Persona {
     private String nombre;
     private String apellido;
-    private String usuario;
+    protected String usuario;
     private String contraseña;
     protected String documento;
     public Persona(String nombre, String apellido, String usuario, String contraseña, String documento) {
