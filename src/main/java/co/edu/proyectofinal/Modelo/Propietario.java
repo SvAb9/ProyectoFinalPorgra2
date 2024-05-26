@@ -3,18 +3,14 @@ package co.edu.proyectofinal.Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Propietario extends Empleado {
+public class Propietario extends Empleado implements  GetTipo {
     private List<Empleado> listaEmpleados;
 
-    public Propietario(String nombre, String apellido, String usuario, String contraseña, String documento, List<Empleado> listaEmpleados) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Propietario(String nombre, String apellido, String usuario, String contraseña, String documento, List<Empleado> listaEmpleados, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
         this.listaEmpleados = listaEmpleados != null ? listaEmpleados : new ArrayList<>();
     }
 
-    @Override
-    public String getTipo() {
-        return "Propietario";
-    }
 
     public List<Empleado> getListaEmpleados() {
         return listaEmpleados;
@@ -36,7 +32,7 @@ public class Propietario extends Empleado {
             default:
                 throw new IllegalArgumentException("Tipo de empleado no válido: " + tipo);
         }
-        Empleado empleado = factory.crearEmpleado(nombre, apellido, usuario, contraseña, documento);
+        Empleado empleado = factory.crearEmpleado(nombre, apellido, usuario, contraseña, documento, tipo);
         if (!listaEmpleados.contains(empleado)) {
             listaEmpleados.add(empleado);
             System.out.println("Empleado contratado: " + empleado.getNombre());
@@ -52,5 +48,10 @@ public class Propietario extends Empleado {
         } else {
             System.out.println("El empleado no está en la lista.");
         }
+    }
+
+    @Override
+    public String getTipo(){
+        return "Propietario";
     }
 }

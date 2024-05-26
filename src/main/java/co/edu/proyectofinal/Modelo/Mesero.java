@@ -1,16 +1,13 @@
 package co.edu.proyectofinal.Modelo;
 
-public class Mesero extends Empleado {
+public class Mesero extends Empleado implements GetTipo {
     private Orden orden;
 
-    public Mesero(String nombre, String apellido, String usuario, String contraseña, String documento) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Mesero(String nombre, String apellido, String usuario, String contraseña, String documento, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
         this.orden = new Orden();
     }
-    
-    public String getTipo() {
-        return "Mesero";
-    }
+
 
     public void hacerOrden(String tipoProducto, String nombre, double precio, String especificacion1, String especificacion2) {
         ProductoFactory factory;
@@ -36,5 +33,10 @@ public class Mesero extends Empleado {
     public void actualizarEstadoOrden(String estado) {
         orden.setEstado(estado);
         System.out.println("Estado de la orden actualizado a: " + estado);
+    }
+
+    @Override
+    public String getTipo() {
+        return "Mesero";
     }
 }

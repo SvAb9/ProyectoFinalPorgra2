@@ -1,9 +1,8 @@
 package co.edu.proyectofinal.Modelo;
 
 public abstract class Empleado extends Persona {
-    public Empleado(String nombre, String apellido, String usuario, String contraseña, String documento) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Empleado(String nombre, String apellido, String usuario, String contraseña, String documento, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
     }
-    
-    public abstract String getTipo();
+
 }

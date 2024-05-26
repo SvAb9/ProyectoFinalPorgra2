@@ -34,8 +34,8 @@ public class ControladorVista {
         tipoProductoComboBox.setItems(FXCollections.observableArrayList("Sandwich", "Bebida"));
         estadoComboBox.setItems(FXCollections.observableArrayList("Pendiente", "Preparando", "Listo", "Entregado"));
 
-        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789");
-        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>());  // Asegúrate de pasar una lista vacía
+        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero");
+        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>(), "cajero");  // Asegúrate de pasar una lista vacía
     }
 
     @FXML
@@ -61,7 +61,7 @@ public class ControladorVista {
         Factura factura = new Factura(mesero.getOrden());
         cajero.agregarFactura(factura);
         mostrarAlerta("Total de la factura: $" + factura.getTotal());
-        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789"); // Reiniciar la orden del mesero
+        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero"); // Reiniciar la orden del mesero
         actualizarListaOrden();
     }
 
