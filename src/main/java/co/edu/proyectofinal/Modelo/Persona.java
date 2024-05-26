@@ -5,7 +5,7 @@ public class Persona {
     private String apellido;
     private String usuario;
     private String contraseña;
-    private String documento;
+    protected String documento;
     public Persona(String nombre, String apellido, String usuario, String contraseña, String documento) {
         this.nombre = nombre;
         this.apellido = apellido;
