@@ -36,5 +36,14 @@ public class Orden {
     public List<Producto> getProductos() {
         return productos;
     }
+
+    public OrdenMemento guardar() {
+        return new OrdenMemento(productos, estado);
+    }
+
+    public void restaurar(OrdenMemento memento) {
+        productos = memento.getProductos();
+        estado = memento.getEstado();
+    }
     
 }
