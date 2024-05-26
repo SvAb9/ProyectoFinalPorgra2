@@ -1,5 +1,6 @@
 package co.edu.proyectofinal.Controlador;
-
+import co.edu.proyectofinal.Modelo.Persona;
+import Servicios.ServicioUsuario;
 import co.edu.proyectofinal.Modelo.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -11,6 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
+
+
 public class ControladorLogin {
 
     @FXML
@@ -18,23 +22,23 @@ public class ControladorLogin {
     @FXML
     private PasswordField contraseñaPasswordField;
 
-    private static Restaurante restaurante = new Restaurante();
+    private final ServicioUsuario servicioUsuario = new ServicioUsuario();
 
     @FXML
     public void iniciarSesion() {
-        String usuario = usuarioTextField.getText();
-        String contraseña = contraseñaPasswordField.getText();
+       try{
+            String usuario = usuarioTextField.getText();
+            String contraseña= contraseñaPasswordField.getText();
+            Persona empleado=servicioUsuario.obtenerPorUsuario(usuario);
 
-        Empleado empleado = restaurante.verificarCredenciales(usuario, contraseña, "empleado");
-        Empleado propietario = restaurante.verificarCredenciales(usuario, contraseña, "propietario");
+            if(empleado!= null && empleado.getContraseña().equals(contraseña)){
 
-        if (empleado != null) {
-            cargarVista("/co/edu/proyectofinal/Vista/mesero.fxml");
-        } else if (propietario != null) {
-            cargarVista("/co/edu/proyectofinal/Vista/propietario.fxml");
-        } else {
-            mostrarAlerta("Credenciales incorrectas");
-        }
+            }
+
+       } catch (IOException e) {
+           e.printStackTrace();
+           mostrarAlerta("Error");
+       }
     }
 
     @FXML
@@ -63,7 +67,4 @@ public class ControladorLogin {
         alert.showAndWait();
     }
 
-    public static Restaurante getRestaurante() {
-        return restaurante;
-    }
 }
