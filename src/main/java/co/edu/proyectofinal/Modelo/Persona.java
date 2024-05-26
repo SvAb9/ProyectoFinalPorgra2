@@ -45,4 +45,15 @@ public class Persona {
     }
 
 
+    public static Persona fromFileString (String fileString){
+        String[]parts = fileString.split(";");
+        if(parts.length != 5){
+            throw new IllegalArgumentException("El archivo debe ser exactamente 5 elementos");
+        }
+        return new Persona(parts[0],parts[1],parts[2],parts[3],parts[4]);
+    }
+
+    public  String toFileString(){
+        return  nombre + "," + apellido + "," + documento + "," + usuario + ";" + contraseña;
+    }
 }
