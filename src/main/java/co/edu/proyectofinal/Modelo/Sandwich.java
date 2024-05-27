@@ -22,12 +22,12 @@ public class Sandwich implements ComponenteSandwich {
 
     @Override
     public double getCosto() {
-        double costo = 1.00; // Costo base del pan
+        double costo = 2000; // Costo base del pan
         if (relleno != null && !relleno.isEmpty()) {
-            costo += 1.00; // Costo del relleno
+            costo += 3000; // Costo del relleno
         }
         if (tieneQueso) {
-            costo += 0.50; // Costo del queso
+            costo += 1000; // Costo del queso
         }
         return costo;
     }

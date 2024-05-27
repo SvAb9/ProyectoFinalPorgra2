@@ -1,12 +1,19 @@
 package co.edu.proyectofinal.Modelo;
 
 public class Bebida extends Producto {
-    public Bebida(String nombre, double precio, String tamaño, String tipo) {
-        super(nombre, precio, tamaño, tipo);
+    
+    public Bebida(String nombre) {
+        super(nombre, 5000);
     }
+
 
     @Override
     public String getTipo() {
         return "Bebida";
+    }
+
+    @Override
+    public double getCosto() {
+        return this.precio;
     }
 }

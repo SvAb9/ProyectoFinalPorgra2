@@ -19,11 +19,6 @@
       <Label text="Precio:" />
       <TextField fx:id="precioTextField" />
 
-      <Label text="Especificación 1:" />
-      <TextField fx:id="especificacion1TextField" />
-
-      <Label text="Especificación 2:" />
-      <TextField fx:id="especificacion2TextField" />
 
       <Button text="Agregar Producto" onAction="#agregarProducto" />
 

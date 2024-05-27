@@ -3,8 +3,8 @@ package co.edu.proyectofinal.Modelo;
 public class ProductoSandwich extends Producto implements ComponenteSandwich {
     private ComponenteSandwich componenteSandwich;
 
-    public ProductoSandwich(String nombre, double precio, String especificacion1, String especificacion2, ComponenteSandwich componenteSandwich) {
-        super(nombre, precio, especificacion1, especificacion2);
+    public ProductoSandwich(String nombre, double precio, ComponenteSandwich componenteSandwich) {
+        super(nombre, precio);
         this.componenteSandwich = componenteSandwich;
     }
 

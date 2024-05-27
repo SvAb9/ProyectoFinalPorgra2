@@ -57,7 +57,7 @@ public class Persona implements  GetTipo{
     }
 
     public  String toFileString(){
-        return  nombre + "," + apellido + "," + documento + "," + usuario + ";" + contraseña + "," + tipo;
+        return  nombre + "," + apellido + "," + documento + "," + usuario + "," + contraseña + "," + tipo;
     }
 
     @Override

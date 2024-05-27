@@ -2,21 +2,29 @@ package co.edu.proyectofinal.Modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Cajero extends Empleado implements  GetTipo {
+    
     private List<Factura> listaFacturas;
 
-    public Cajero(String nombre, String apellido, String usuario, String contraseña, String documento, List<Factura> listaFacturas, String tipo) {
+    public Cajero(String nombre, String apellido, String usuario, String contraseña, String documento, String tipo) {
         super(nombre, apellido, usuario, contraseña, documento, tipo);
-        this.listaFacturas = listaFacturas != null ? listaFacturas : new ArrayList<>();
+        this.listaFacturas = new ArrayList<>();
     }
 
-    public List<Factura> getListaFacturas() {
-        return listaFacturas;
-    }
+    public Factura generarFactura (Orden orden){
 
-    public void setListaFacturas(List<Factura> listaFacturas) {
-        this.listaFacturas = listaFacturas;
+        double subTotal = orden.calcularTotal();
+        double total = subTotal;
+        
+        Factura factura = new Factura.Builder()
+        .subTotal(subTotal)
+        .total(total)
+        .codigoFactura(UUID.randomUUID())
+        .build();
+    return factura;
+
     }
 
     public void agregarFactura(Factura factura) {

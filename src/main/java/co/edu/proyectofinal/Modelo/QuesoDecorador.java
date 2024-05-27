@@ -12,6 +12,6 @@ public class QuesoDecorador extends DecoradorSandwich {
 
     @Override
     public double getCosto() {
-        return sandwichDecorado.getCosto() + 0.50;
+        return sandwichDecorado.getCosto() + 1000;
     }
 }

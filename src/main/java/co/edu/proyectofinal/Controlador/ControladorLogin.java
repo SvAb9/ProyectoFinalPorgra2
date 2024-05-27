@@ -25,7 +25,7 @@ public class ControladorLogin {
     private PasswordField contraseñaPasswordField;
 
     private final ServicioUsuario servicioUsuario = new ServicioUsuario();
-    private static final String USUARIO_FILE= "./persistence/txt_persistence/usuarios.txt";
+    private static final String USUARIO_FILE= "persistence\\txt_persistence\\usuarios.txt";
 
     @FXML
     public void iniciarSesion() {
