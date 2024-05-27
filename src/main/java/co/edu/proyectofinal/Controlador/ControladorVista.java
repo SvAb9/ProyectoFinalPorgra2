@@ -1,10 +1,6 @@
 package co.edu.proyectofinal.Controlador;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import co.edu.proyectofinal.Modelo.*;
-import co.edu.proyectofinal.Modelo.Factura.Builder;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -21,10 +17,6 @@ public class ControladorVista {
     @FXML
     private TextField precioTextField;
     @FXML
-    private TextField especificacion1TextField;
-    @FXML
-    private TextField especificacion2TextField;
-    @FXML
     private ListView<String> ordenListView;
     @FXML
     private ComboBox<String> estadoComboBox;
@@ -37,7 +29,7 @@ public class ControladorVista {
         estadoComboBox.setItems(FXCollections.observableArrayList("Pendiente", "Preparando", "Listo", "Entregado"));
 
         mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero");
-        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>(), "cajero");  // Asegúrate de pasar una lista vacía
+        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", "cajero");
     }
 
     @FXML
@@ -45,10 +37,8 @@ public class ControladorVista {
         String tipoProducto = tipoProductoComboBox.getValue();
         String nombre = nombreTextField.getText();
         double precio = Double.parseDouble(precioTextField.getText());
-        String especificacion1 = especificacion1TextField.getText();
-        String especificacion2 = especificacion2TextField.getText();
 
-        mesero.hacerOrden(tipoProducto, nombre, precio, especificacion1, especificacion2);
+        mesero.hacerOrden(tipoProducto, nombre, precio);
         actualizarListaOrden();
     }
 
@@ -60,17 +50,16 @@ public class ControladorVista {
 
     @FXML
     public void cobrarOrden() {
-        double subTotal= mesero.getOrden().getProductos().stream().mapToDouble(Producto::getPrecio).sum();
-        double total= subTotal;
-        UUID codigo= UUID.randomUUID();
-
-        Factura factura= new Factura.Builder().subTotal(subTotal).total(total).codigoFactura(codigo).build();
-        cajero.agregarFactura(factura);
-        mostrarAlerta("El total de la orden es de: $" + factura.getTotal());
-
-        Mesero mesero= new Mesero("Emilio","Echeverry","Emi","123","1234","mesero");
-        actualizarListaOrden();
-
+        Orden orden = mesero.getOrden();
+        if (!orden.getProductos().isEmpty()) {
+            Factura factura = cajero.generarFactura(orden);
+            cajero.agregarFactura(factura);
+            mostrarAlerta("El total de la orden es de: $" + factura.getTotal());
+            mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero"); // Reiniciar la orden del mesero
+            actualizarListaOrden();
+        } else {
+            mostrarAlerta("No hay órdenes para cobrar.");
+        }
     }
 
     private void actualizarListaOrden() {
