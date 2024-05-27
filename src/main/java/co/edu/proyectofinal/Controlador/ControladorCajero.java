@@ -16,7 +16,7 @@ public class ControladorCajero {
     private Cajero cajero;
 
     public void initialize() {
-        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>());
+        cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>(), "cajero");
     }
 
     @FXML

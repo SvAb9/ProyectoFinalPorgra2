@@ -1,7 +1,9 @@
 package co.edu.proyectofinal.Controlador;
 
+import Servicios.ServicioUsuario;
 import co.edu.proyectofinal.Modelo.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
@@ -10,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
 
 public class ControladorRegistro {
 
@@ -26,6 +30,16 @@ public class ControladorRegistro {
     @FXML
     private TextField tipoUsuarioTextField;
 
+    private final ServicioUsuario servicioUsuario = new ServicioUsuario(); //clase para manejar los usuarios
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     public void registrar() {
         String nombre = nombreTextField.getText();
@@ -35,19 +49,13 @@ public class ControladorRegistro {
         String documento = documentoTextField.getText();
         String tipoUsuario = tipoUsuarioTextField.getText().toLowerCase();
 
-        Restaurante restaurante = ControladorLogin.getRestaurante();
-        if (tipoUsuario.equals("empleado")) {
-            Empleado empleado = new Mesero(nombre, apellido, usuario, contraseña, documento); // Asumimos mesero por defecto
-            restaurante.agregarEmpleado(empleado);
-            mostrarAlerta("Empleado registrado: " + nombre + " " + apellido);
-        } else if (tipoUsuario.equals("propietario")) {
-            Propietario propietario = new Propietario(nombre, apellido, usuario, contraseña, documento, null);
-            restaurante.agregarEmpleado(propietario); // Agregamos el propietario como empleado también
-            mostrarAlerta("Propietario registrado: " + nombre + " " + apellido);
-        } else {
-            mostrarAlerta("Tipo de usuario no válido.");
+        Persona  nuevoUsuario= new Persona(nombre, apellido, documento, usuario, contraseña, tipoUsuario);
+        try{
+            servicioUsuario.añadirUsuario(nuevoUsuario);
+        }catch(Exception e){
+            e.printStackTrace();
+            showAlert("Confirmación", "Error al registrar el usuario", AlertType.ERROR);
         }
-
         regresarALogin();
     }
 

@@ -26,7 +26,7 @@ public class ControladorPropietario {
     private Propietario propietario;
 
     public void initialize() {
-        propietario = new Propietario("Carlos", "Gómez", "carlos", "propietario123", "123456789", new ArrayList<>());
+        propietario = new Propietario("Carlos", "Gómez", "carlos", "propietario123", "123456789", new ArrayList<>(), "propietario");
         actualizarListaEmpleados();
     }
 

@@ -3,16 +3,12 @@ package co.edu.proyectofinal.Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cajero extends Empleado {
+public class Cajero extends Empleado implements  GetTipo {
     private List<Factura> listaFacturas;
 
-    public Cajero(String nombre, String apellido, String usuario, String contraseña, String documento, List<Factura> listaFacturas) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Cajero(String nombre, String apellido, String usuario, String contraseña, String documento, List<Factura> listaFacturas, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
         this.listaFacturas = listaFacturas != null ? listaFacturas : new ArrayList<>();
-    }
-
-    public String getTipo() {
-        return "Cajero";
     }
 
     public List<Factura> getListaFacturas() {
@@ -33,5 +29,10 @@ public class Cajero extends Empleado {
             total += factura.getTotal();
         }
         return total;
+    }
+
+    @Override
+    public String getTipo(){
+        return "Cajero";
     }
 }

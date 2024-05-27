@@ -30,7 +30,7 @@ public class ControladorMesero {
         tipoProductoComboBox.setItems(FXCollections.observableArrayList("Sandwich", "Bebida"));
         estadoComboBox.setItems(FXCollections.observableArrayList("Pendiente", "Preparando", "Listo", "Entregado"));
 
-        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789");
+        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero");
     }
 
     @FXML

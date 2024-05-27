@@ -1,17 +1,20 @@
 package co.edu.proyectofinal.Modelo;
 
-public class Persona {
+public class Persona implements  GetTipo{
     private String nombre;
     private String apellido;
-    protected String usuario;
+    private String usuario;
     private String contraseña;
-    protected String documento;
-    public Persona(String nombre, String apellido, String usuario, String contraseña, String documento) {
+    private String documento;
+    private String tipo;
+    public Persona(String nombre, String apellido, String usuario, String contraseña, String documento, String tipo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.documento = documento;
+        this.tipo= tipo;
+
     }
     public String getNombre() {
         return nombre;
@@ -47,13 +50,18 @@ public class Persona {
 
     public static Persona fromFileString (String fileString){
         String[]parts = fileString.split(";");
-        if(parts.length != 5){
+        if(parts.length != 6){
             throw new IllegalArgumentException("El archivo debe ser exactamente 5 elementos");
         }
-        return new Persona(parts[0],parts[1],parts[2],parts[3],parts[4]);
+        return new Persona(parts[0],parts[1],parts[2],parts[3],parts[4], parts[5]);
     }
 
     public  String toFileString(){
-        return  nombre + "," + apellido + "," + documento + "," + usuario + ";" + contraseña;
+        return  nombre + "," + apellido + "," + documento + "," + usuario + ";" + contraseña + "," + tipo;
+    }
+
+    @Override
+    public String getTipo() {
+        return tipo;
     }
 }
