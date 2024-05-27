@@ -1,8 +1,10 @@
 package co.edu.proyectofinal.Controlador;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import co.edu.proyectofinal.Modelo.*;
+import co.edu.proyectofinal.Modelo.Factura.Builder;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -58,11 +60,17 @@ public class ControladorVista {
 
     @FXML
     public void cobrarOrden() {
-        Factura factura = new Factura(mesero.getOrden());
+        double subTotal= mesero.getOrden().getProductos().stream().mapToDouble(Producto::getPrecio).sum();
+        double total= subTotal;
+        UUID codigo= UUID.randomUUID();
+
+        Factura factura= new Factura.Builder().subTotal(subTotal).total(total).codigoFactura(codigo).build();
         cajero.agregarFactura(factura);
-        mostrarAlerta("Total de la factura: $" + factura.getTotal());
-        mesero = new Mesero("Juan", "Pérez", "jperez", "1234", "123456789", "mesero"); // Reiniciar la orden del mesero
+        mostrarAlerta("El total de la orden es de: $" + factura.getTotal());
+
+        Mesero mesero= new Mesero("Emilio","Echeverry","Emi","123","1234","mesero");
         actualizarListaOrden();
+
     }
 
     private void actualizarListaOrden() {
