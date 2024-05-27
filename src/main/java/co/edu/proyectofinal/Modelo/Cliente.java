@@ -8,8 +8,8 @@ public class Cliente extends Persona implements Observer{
     private List<CuponStrategy> cupones;
     
 
-    public Cliente(String nombre, String apellido, String usuario, String contraseña, String documento, List<CuponStrategy> cupones) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Cliente(String nombre, String apellido, String usuario, String contraseña, String documento, List<CuponStrategy> cupones, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
         this.cupones = new ArrayList<>();
     }
 

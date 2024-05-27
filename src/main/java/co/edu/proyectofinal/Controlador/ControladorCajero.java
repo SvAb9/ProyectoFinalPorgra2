@@ -18,22 +18,27 @@ public class ControladorCajero {
     public void initialize() {
         cajero = new Cajero("Ana", "García", "agarcia", "5678", "987654321", new ArrayList<>(), "cajero");
     }
-
     @FXML
     public void cobrarOrden() {
         // Aquí deberías obtener la orden seleccionada para cobrar
         // Simularemos con la primera orden disponible
         if (!cajero.getListaFacturas().isEmpty()) {
-            Factura factura = cajero.getListaFacturas().get(0);  // Simulación
+            Factura.Builder facturaBuilder = new Factura.Builder(); // Crear un nuevo builder
+            Factura factura = facturaBuilder
+                                .subTotal(cajero.getListaFacturas().get(0).getSubTotal()) // Establecer el subtotal
+                                .total(cajero.getListaFacturas().get(0).getTotal()) // Establecer el total
+                                .codigoFactura(cajero.getListaFacturas().get(0).getCodigoFactura()) // Establecer el código de factura
+                                .build(); // Construir la factura
+    
             cajero.cobrar();
             mostrarAlerta("Total cobrado: $" + factura.getTotal());
-            cajero.getListaFacturas().remove(factura);
+            cajero.getListaFacturas().remove(0); // Remover la factura cobrada
             actualizarListaOrdenes();
         } else {
             mostrarAlerta("No hay ordenes para cobrar.");
         }
     }
-
+    
     private void actualizarListaOrdenes() {
         ordenesListView.getItems().clear();
         for (Factura factura : cajero.getListaFacturas()) {

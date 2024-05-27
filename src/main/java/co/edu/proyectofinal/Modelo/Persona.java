@@ -3,7 +3,7 @@ package co.edu.proyectofinal.Modelo;
 public class Persona implements  GetTipo{
     private String nombre;
     private String apellido;
-    private String usuario;
+    public String usuario;
     private String contraseña;
     private String documento;
     private String tipo;

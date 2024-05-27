@@ -4,8 +4,8 @@ public class Mesero extends Empleado {
     private Orden orden;
     private OrdenCaretaker caretaker;
 
-    public Mesero(String nombre, String apellido, String usuario, String contraseña, String documento) {
-        super(nombre, apellido, usuario, contraseña, documento);
+    public Mesero(String nombre, String apellido, String usuario, String contraseña, String documento, String tipo) {
+        super(nombre, apellido, usuario, contraseña, documento, tipo);
         this.orden = new Orden();
         this.caretaker= new OrdenCaretaker();
     }
